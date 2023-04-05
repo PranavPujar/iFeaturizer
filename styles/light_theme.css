@@ -1,0 +1,118 @@
+/* Apply the following font to all widgets */
+QWidget {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+  
+  /* Apply the following font to all buttons */
+  QPushButton {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px 10px;
+    
+  }
+  
+  /* Apply the following font to all line edits */
+  QLineEdit {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px;
+    
+  }
+  
+  /* Apply the following font to all radio buttons */
+  QRadioButton {
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px;
+    
+  }
+  
+  /* Apply the following font to all plain text edits */
+  QPlainTextEdit {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px;
+    
+  }
+
+  /* Apply the following styles to all plain text edits when they're disabled */
+  QPlainTextEdit:disabled {
+    background-color: #eee;
+    border-color: #ccc;
+    color: #aaa;
+  }
+  
+  
+  /* Apply the following font to all combo boxes */
+  QComboBox {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px;
+    
+  }
+  
+  /* Apply the following font to all menus */
+  QMenu {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px;
+  }
+  
+  /* Apply the following styles to all widgets when they're hovered over */
+  QWidget:hover {
+    background-color: #eee;
+  }
+  
+  /* Apply the following styles to all buttons when they're hovered over */
+  QPushButton:hover {
+    background-color: #eee;
+    border-color: #aaa;
+  }
+  
+  /* Apply the following styles to all line edits when they're hovered over */
+  QLineEdit:hover {
+    background-color: #eee;
+    border-color: #aaa;
+  }
+  
+  /* Apply the following styles to all radio buttons when they're hovered over */
+  QRadioButton:hover {
+    background-color: #eee;
+  }
+  
+  /* Apply the following styles to all plain text edits when they're hovered over */
+  QPlainTextEdit:hover {
+    background-color: #eee;
+    border-color: #aaa;
+  }
+  
+  /* Apply the following styles to all combo boxes when they're hovered over */
+  QComboBox:hover {
+    background-color: #eee;
+    border-color: #aaa;
+  }
+  
+  /* Apply the following styles to all menus when they're hovered over */
+  QMenu:hover {
+    background-color: #eee;
+    border-color: #aaa;
+  }
+  
