@@ -97,11 +97,13 @@ class UI_MainWindow(QtWidgets.QMainWindow):
 
 
         #TEMPORARY DEBUGGING
-        self.in_file_path.setText("C:/Users/prana/OneDrive/Desktop/Research/protein_research/GUI/lengths.csv")
+        self.in_file_path.setText("C:/Users/prana/OneDrive/Desktop/Research/protein_research/GUI/lengths_test.csv")
         self.in_fasta_col_name.setText("fasta_seq")
         self.in_iFeature_dir.setText("C:/Users/prana/PycharmProjects/pythonProject/venv/iFeature")
-        self.in_destination_path.setText("C:/Users/prana/OneDrive/Desktop/Research/protein_research/GUI/destination")
-        self.in_merged_df_name.setText("test")
+        self.in_destination_path.setText("C:/Users/prana/PycharmProjects/pythonProject/venv/iFeaturizer/destination")
+        # self.in_merged_df_name.setText("test")
+
+        # self.single_fasta_sequence.setPlainText("MADTPTLFTQFLRHHLPGQRFRKDILKQAGRILANKGEDATIAFLRGKSEESPPDFQPPVKCPIIACSRPLTEWPIYQASVAIQGYVYGQSLAEFEASDPGCSKDGLLGWFDKTGVCTDYFSVQGLNLIFQNARKRYIGVQTKVTNRNEKRHKKLKRINAKRIAEGLPELTSDEPESALDETGHLIDPPGLNTNIYCYQQVSPKPLALSEVNQLPTAYAGYSTSGDDPIQPMVTKDRLSISKGQPGYIPEHQRALLSQKKHRRMRGYGLKARALLVIVRIQDDWAVIDLRSLLRNAYWRRIVQTKEPSTITKLLKLVTGDPVLDATRMVATFTYKPGIVQVRSAKCLKNKQGSKLFSERYLNETVSVTSIDLGSNNLVAVATYRLVNGNTPELLQRFTLPSHLVKDFERYKQAHDTLEDSIQKTAVASLPQGQQTEIRMWSMYGFREAQERVCQELGLADGSIPWNVMTATSTILTDLFLARGGDPKKCMFTSEPKKKKNSKQVLYKIRDRAWAKMYRTLLSKETREAWNKALWGLKRGSPDYARLSKRKEELARRCVNYTISTAEKRAQCGRTIVALEDLNIGFFHGRGKQEPGWVGLFTRKKENRWLMQALHKAFLELAHHRGYHVIEVNPAYTSQTCPVCRHCDPDNRDQHNREAFHCIGCGFRGNADLDVATHNIAMVAITGESLKRARGSVASKTPQPLAAE")
 
         # self.set_lightTheme()
         
@@ -185,13 +187,13 @@ class UI_MainWindow(QtWidgets.QMainWindow):
         self.validate_page2()
         if ERROR_MSG == "VALID":
             
-            self.hide()
-            msg = QtWidgets.QMessageBox()
-            msg.setWindowTitle("Extract")
-            msg.setText("Running Feature Extraction...")
-            msg.setIcon(QtWidgets.QMessageBox.Information)
-            msg.addButton(QtWidgets.QMessageBox.Ok)
-            msg.exec_()
+            # self.hide()
+            # msg = QtWidgets.QMessageBox()
+            # msg.setWindowTitle("Extract")
+            # msg.setText("Running Feature Extraction...")
+            # msg.setIcon(QtWidgets.QMessageBox.Information)
+            # msg.addButton(QtWidgets.QMessageBox.Ok)
+            # msg.exec_()
 
             iF = iFeature_set(  self.in_file_path.text().strip(),      \
                                 in_file,                               \
@@ -201,6 +203,8 @@ class UI_MainWindow(QtWidgets.QMainWindow):
 
             iF.generate_intermediate_files()
             
+            print("Extracting...\n")
+
             try:
                 iF.extract()
             except:
@@ -217,7 +221,9 @@ class UI_MainWindow(QtWidgets.QMainWindow):
             except:
                 print("postprocess didnt work")
             
-            self.show()
+            finally:
+                print("\n\nFeature Extraction Complete!\n\n")
+            # self.show()
             
             
         else:
