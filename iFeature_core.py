@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import os
-from sys import platform
+import platform
 from functools import reduce
 
 #add support for Linux and OS X  
@@ -9,6 +9,7 @@ from functools import reduce
 class iFeature_set:
     def __init__(self, in_path, in_file, in_fasta_col_name, iFeature_dir):
 
+        self.native_os = platform.system()
         #Directory to store initial and postprocessed output TSV files
         self.tsv_dir = os.path.dirname(in_path)
         self.postprocessed_dir = "{}/postprocessed".format(os.path.dirname(in_path))
@@ -19,7 +20,13 @@ class iFeature_set:
 
         #Paths of intermediate files
         self.protein_path = "{}/protein.txt".format(os.path.dirname(in_path))
-        self.bat_path = "{}/run.bat".format(os.path.dirname(in_path))
+        
+        if self.native_os == 'Windows':
+            self.bat_path = "{}/run.bat".format(os.path.dirname(in_path))
+        elif self.native_os == 'Darwin':
+            self.bat_path = "{}/run.command".format(os.path.dirname(in_path))
+        else:
+            self.bat_path = "{}/run.bash".format(os.path.dirname(in_path))
 
         #Iterable containing all FASTA sequences to extract features from 
         self.fasta = in_file[in_fasta_col_name]
@@ -28,10 +35,10 @@ class iFeature_set:
         self.iFeature_dir = iFeature_dir
         
         #21 feature descriptor types 
-        self.feature_descriptors = ['AAC', 'APAAC', 'CKSAAGP', 'CKSAAP', 'CTDC']#, 'CTDD', \
-                                    # 'CTDT', 'CTriad', 'DDE', 'DPC', 'GAAC', 'GDPC', 'Geary', \
-                                    # 'GTPC', 'KSCTriad', 'Moran', 'NMBroto', 'PAAC', 'QSOrder', \
-                                    # 'SOCNumber', 'TPC']
+        self.feature_descriptors = ['AAC', 'APAAC', 'CKSAAGP', 'CKSAAP', 'CTDC', 'CTDD', \
+                                    'CTDT', 'CTriad', 'DDE', 'DPC', 'GAAC', 'GDPC', 'Geary', \
+                                    'GTPC', 'KSCTriad', 'Moran', 'NMBroto', 'PAAC', 'QSOrder', \
+                                    'SOCNumber', 'TPC']
 
 
     def generate_intermediate_files(self):
@@ -43,6 +50,9 @@ class iFeature_set:
         
         #Generate run.bat
         with open(self.bat_path, 'w+') as bat_file:
+
+            if self.native_os =='Darwin':
+                bat_file.write("#!/bin/bash\n\n")
 
             #cd to iFeature dir to run subsequent commands
             bat_file.write('cd {}\n'.format(self.iFeature_dir))
@@ -83,9 +93,6 @@ class iFeature_set:
                 data_merged.to_csv('{}/{}.{}'.format(destination_dir, df_merged_name, out_type), sep='\t')
 
             os.chdir(destination_dir)
-
-            #Vary commands as per native OS
-            native_os = platform.system()
-            # if native_os == 'Windows':
+            
             os.system('tar -a -c -f {0}.zip {0}.{1}'.format(df_merged_name, out_type)) #Make Mac-compatible as well
             os.system('rm {}.{}'.format(df_merged_name, out_type))
